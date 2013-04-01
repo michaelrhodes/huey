@@ -1,10 +1,8 @@
-Huey
-====
+# Huey
 
 Huey is a little Javascript utility that finds the dominant colour of an image, then returns it as an RGB array.
 
-Usage
------
+## Usage
 
 ```javascript
 Huey("./image.jpg", function(rgb) {
@@ -13,3 +11,6 @@ Huey("./image.jpg", function(rgb) {
   var blue = rgb[2]
 })
 ```
+
+### Demonstration
+[http://michaelrhodes.github.com/huey/](http://michaelrhodes.github.com/huey/)
