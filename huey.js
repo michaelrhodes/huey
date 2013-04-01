@@ -33,7 +33,9 @@ Huey = (function(document, undefined) {
 					continue
 				}
 				highestColorCount = colorCount[rgb]
-				mostFrequentColor = rgb.split(",")
+				mostFrequentColor = rgb.split(",").map(function(value) {
+					return parseInt(value, 10)
+				})
 			}
 			return mostFrequentColor
 		}
