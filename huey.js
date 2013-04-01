@@ -1,5 +1,4 @@
 Huey = (function(document, undefined) {
-
 	var canvas = null
 	var canvasSupported = (function(document) {
 		canvas = document.createElement("canvas")
@@ -14,11 +13,10 @@ Huey = (function(document, undefined) {
 			context.drawImage(image, 0, 0)
 			return context.getImageData(0, 0, image.width, image.height).data
 		},
-		getColors: function(data) {
+		getMostFrequentColor: function(data) {
 			var colorCount = {}
 			var highestColorCount = 0
-			var mostFrequentColor = null
-			var rgb, min, max
+			var mostFrequentColor, rgb, min, max
 			for (var i = 0, l = data.length; i < l; i += 512) {
 				rgb = [data[i], data[i + 1], data[i + 2]]
 				min = Math.min(rgb[0], Math.min(rgb[1], rgb[2]))
@@ -33,20 +31,24 @@ Huey = (function(document, undefined) {
 					continue
 				}
 				highestColorCount = colorCount[rgb]
-				mostFrequentColor = rgb.split(",").map(function(value) {
-					return parseInt(value, 10)
-				})
+				mostFrequentColor = rgb.split(",")
 			}
-			return mostFrequentColor
+			if (!mostFrequentColor) {
+				return null
+			}
+			return mostFrequentColor.map(function(value) {
+				return parseInt(value, 10)
+			})
 		}
 	}
 
 	return function(url, callback) {
+		var image, data, color
 		if (canvasSupported && url) {
-			var image = new Image()
+			image = new Image()
 			image.onload = function() {
-				var data = helper.getImageData(image)
-				var color = helper.getColors(data, true)
+				data = helper.getImageData(image)
+				color = helper.getMostFrequentColor(data)
 				callback(color)
 			}
 			image.src = url
