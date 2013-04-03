@@ -21,8 +21,9 @@ Huey = (function(document, undefined) {
 				rgb = [data[i], data[i + 1], data[i + 2]]
 				min = Math.min(rgb[0], Math.min(rgb[1], rgb[2]))
 				max = Math.max(rgb[0], Math.max(rgb[1], rgb[2]))
-				if (max - min < 24)
+				if (max - min < 24) {
 					continue
+				}
 				rgb = rgb.join(",")
 				colorCount[rgb] = (colorCount.hasOwnProperty(rgb) ? ++colorCount[rgb] : 1)
 			}
