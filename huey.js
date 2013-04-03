@@ -14,19 +14,19 @@ Huey = (function(document, undefined) {
 			return context.getImageData(0, 0, image.width, image.height).data
 		},
 		getMostFrequentColor: function(data) {
-			var pixelCount = data.length
+			var dataLength = data.length
 			var colorCount = {}
 			var highestColorCount = 0
 			var jump = (
-				pixelCount < 1e4 ? 24 :
-				pixelCount < 1e5 ? 56 :
-				pixelCount < 1e6 ? 512 :
-				pixelCount < 1e7 ? 768 :
-				pixelCount < 1e8 ? 10240 :
+				dataLength < 1e4 ? 24 :
+				dataLength < 1e5 ? 56 :
+				dataLength < 1e6 ? 512 :
+				dataLength < 1e7 ? 768 :
+				dataLength < 1e8 ? 10240 :
 				12288
 			)
 			var mostFrequentColor, rgb, min, max
-			for (var i = 0; i < pixelCount; i += jump) {
+			for (var i = 0; i < dataLength; i += jump) {
 				rgb = [data[i], data[i + 1], data[i + 2]]
 				min = Math.min(rgb[0], Math.min(rgb[1], rgb[2]))
 				max = Math.max(rgb[0], Math.max(rgb[1], rgb[2]))
