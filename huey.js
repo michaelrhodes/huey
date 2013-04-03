@@ -44,7 +44,7 @@ Huey = (function(document, undefined) {
 
 	return function(url, callback) {
 		var image, data, color
-		if (canvasSupported && url) {
+		if (canvasSupported && url && callback) {
 			image = new Image()
 			image.onload = function() {
 				data = helper.getImageData(image)
