@@ -11,7 +11,7 @@ Huey("./image.jpg", function(rgb) {
 ```
 
 ### Demonstration
-[http://michaelrhodes.github.com/huey/](http://michaelrhodes.github.com/huey/)
+[http://michaelrhodes.github.io/huey/](http://michaelrhodes.github.io/huey/)
 
 ## Browser support
 Chrome, Safari, Firefox, IE9+ (Due to the use of Canvas and Array.prototype.map)
