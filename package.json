@@ -1,6 +1,6 @@
 {
   "name": "huey",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A little utility that finds the dominant colour of an image and returns it as an RGB array.",
   "main": "index.js",
   "browser": "browser.js",
@@ -16,22 +16,19 @@
   },
   "devDependencies": {
     "tape": "~2.1.0",
-    "brfs": "~0.0.8",
-    "browserify": "~2.35.0",
-    "uglify-js": "~2.4.1"
+    "brfs": "~0.0.8"
   },
   "scripts": {
-    "test": "tape ./test/server.js",
-    "postinstall": "./node_modules/.bin/browserify ./browser.js -s huey -o ./build/huey.js && ./node_modules/.bin/uglifyjs ./build/huey.js -mco ./build/huey.min.js"
+    "test": "tape ./test/server.js"
   },
   "testling": {
     "files": "./test/browser.js",
     "browsers": {
       "ie": [8, 9, 10],
-      "chrome": [25],
-      "firefox": [4, 19],
-      "safari": [5.1, 6],
-      "opera": [10, 12],
+      "chrome": [20, 25, 29],
+      "firefox": [4, 19, 24],
+      "safari": [4, 5.1, 6],
+      "opera": [10, 12, 15],
       "iphone": [6],
       "android": [4.2]
     }
