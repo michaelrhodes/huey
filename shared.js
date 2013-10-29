@@ -1,17 +1,34 @@
-Huey = (function(document, undefined) {
-  var canvas = null
-  var canvasSupported = (function(document) {
-    canvas = document.createElement('canvas')
-    return !!(canvas.getContext && canvas.getContext('2d'))
-  })(document)
+var is = function(variable, type) {
+  return variable && typeof variable === type
+}
 
-  var helper = {
+exports.invalid = function(path, callback, supported) {
+  var message = 
+  (supported === false) ?
+    'Your browser doesn’t support <canvas>' :
+  (path === undefined)  ?
+    'Please provide an image path.' :
+  (is(callback, 'function') === false) ?
+    'Please provide a callback function.' :
+  null
+
+  return (message ?
+    new Error(message) :
+    false
+  )
+}
+
+exports.helper = function(canvas) {
+  return {
     getImageData: function(image) {
       var context = canvas.getContext('2d')
       canvas.width = image.width
-       canvas.height = image.height
+      canvas.height = image.height
       context.drawImage(image, 0, 0)
-      return context.getImageData(0, 0, image.width, image.height).data
+      var raw = context.getImageData(
+        0, 0, image.width, image.height
+      )
+      return raw.data
     },
     getMostFrequentColor: function(data) {
       var dataLength = data.length
@@ -34,7 +51,10 @@ Huey = (function(document, undefined) {
           continue
         }
         rgb = rgb.join(',')
-        colorCount[rgb] = (colorCount.hasOwnProperty(rgb) ? ++colorCount[rgb] : 1)
+        colorCount[rgb] = (
+          colorCount.hasOwnProperty(rgb) ?
+          ++colorCount[rgb] : 1
+        )
       }
       for (rgb in colorCount) {
         if (colorCount[rgb] < highestColorCount) {
@@ -46,25 +66,10 @@ Huey = (function(document, undefined) {
       if (!mostFrequentColor) {
         return null
       }
-      return mostFrequentColor.split(',').map(function(value) {
-        return parseInt(value, 10)
-      })
+      return mostFrequentColor.split(',')
+        .map(function(value) {
+          return parseInt(value, 10)
+        })
     }
   }
-
-  return function(url, callback) {
-    var image, data, color
-    if (canvasSupported && url && callback) {
-      image = new Image()
-      image.onload = function() {
-        data = helper.getImageData(image)
-        color = helper.getMostFrequentColor(data)
-        callback(color)
-      }
-      if (!/^data/.test(url)) {
-        image.crossOrigin = true
-      }
-      image.src = url
-    }
-  }
-})(document)
+} 

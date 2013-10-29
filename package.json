@@ -1,0 +1,53 @@
+{
+  "name": "huey",
+  "version": "1.0.0",
+  "description": "A little utility that finds the dominant colour of an image and returns it as an RGB array.",
+  "main": "index.js",
+  "browser": "browser.js",
+  "bin": "cli.js",
+  "browserify": {
+    "transform": ["brfs"]
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "canvas": "~1.1.1"
+  },
+  "devDependencies": {
+    "tape": "~2.1.0",
+    "brfs": "~0.0.8",
+    "browserify": "~2.35.0",
+    "uglify-js": "~2.4.1"
+  },
+  "scripts": {
+    "test": "tape ./test/server.js",
+    "postinstall": "./node_modules/.bin/browserify ./browser.js -s huey -o ./build/huey.js && ./node_modules/.bin/uglifyjs ./build/huey.js -mco ./build/huey.min.js"
+  },
+  "testling": {
+    "files": "./test/browser.js",
+    "browsers": {
+      "ie": [8, 9, 10],
+      "chrome": [25],
+      "firefox": [4, 19],
+      "safari": [5.1, 6],
+      "opera": [10, 12],
+      "iphone": [6],
+      "android": [4.2]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:michaelrhodes/huey.git"
+  },
+  "keywords": [
+    "dominant",
+    "colour",
+    "color"
+  ],
+  "author": "Michael Rhodes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/michaelrhodes/huey/issues"
+  }
+}
