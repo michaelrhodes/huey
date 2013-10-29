@@ -1,6 +1,6 @@
 {
   "name": "huey",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A little utility that finds the dominant colour of an image and returns it as an RGB array.",
   "main": "index.js",
   "browser": "browser.js",
