@@ -13,13 +13,13 @@ module.exports = function(path, callback) {
     return
   }
 
-  shared.getImageData(path, function(error, data) {
+  shared.getImageData(path, function(error, info) {
     if (error) {
       callback(error)
       return
     }
-    var color = shared.getMostFrequentColor(data)
-    callback(null, color)
+    var color = shared.getMostFrequentColor(info.data)
+    callback(null, color, info)
   })
 }
 
@@ -52,7 +52,11 @@ module.exports = function(path, callback) {
   image.onerror = callback
   image.onload = function() {
     var data = shared(canvas)
-    callback(null, data(image))
+    callback(null, {
+      data: data(image),
+      height: image.height,
+      width: image.width
+    })
   }
 }
 
