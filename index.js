@@ -17,6 +17,6 @@ module.exports = function(path, callback) {
       return
     }
     var color = shared.getMostFrequentColor(info.data)
-    callback(null, color, info.data)
+    callback(null, color, info)
   })
 }

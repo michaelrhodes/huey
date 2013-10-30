@@ -33,4 +33,11 @@ module.exports = function(huey, path) {
       test.ok(error, error.message)
     }
   })
+  
+  run('it returns the image data', function(test) {
+    test.plan(1)
+    huey(path.trad, function(error, rgb, image) {
+      test.ok(image, 'it does')
+    })
+  })
 }
