@@ -1,5 +1,5 @@
 var fs = require('fs')
-var huey = require('../browser')
+var huey = require('../')
 
 require('./shared')(huey, {
   trad: fs.readFileSync(__dirname + '/images/trad.txt'),

@@ -1,11 +1,7 @@
-var fs = require('fs')
-var Canvas = require('canvas')
 var shared = require('./shared')
 
-module.exports = function(path, callback) { 
-  var error = shared.invalid(
-    path, callback
-  )
+module.exports = function(path, callback) {
+  var error = shared.invalid(path, callback) 
 
   if (error) {
     if (!callback) {
@@ -15,23 +11,12 @@ module.exports = function(path, callback) {
     return
   }
 
-  fs.readFile(path, function(error, file) {
+  shared.getImageData(path, function(error, data) {
     if (error) {
       callback(error)
       return
     }
-
-    var image = new Canvas.Image
-    image.src = file 
-    
-    var canvas = new Canvas(
-      image.width, image.height
-    )
-
-    var huey = shared.helper(canvas)
-    var data = huey.getImageData(image)
-    var color = huey.getMostFrequentColor(data)
-
+    var color = shared.getMostFrequentColor(data)
     callback(null, color)
-  })  
+  })
 }
