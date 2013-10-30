@@ -11,12 +11,12 @@ module.exports = function(path, callback) {
     return
   }
 
-  shared.getImageData(path, function(error, data) {
+  shared.getImageData(path, function(error, info) {
     if (error) {
       callback(error)
       return
     }
-    var color = shared.getMostFrequentColor(data)
+    var color = shared.getMostFrequentColor(info.data)
     callback(null, color)
   })
 }
