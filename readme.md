@@ -19,10 +19,14 @@ $ npm install [-g] huey
 
 ### Browser & Server
 ``` js
-huey('./image.jpg', function(error, rgb) {
+huey('./image.jpg', function(error, rgb, data) {
   var red = rgb[0]
   var green = rgb[1]
   var blue = rgb[2]
+
+  // In case you want to do something
+  // with the raw image data.
+  console.log(data)
 })
 ```
 
