@@ -36,7 +36,7 @@ huey('./image.jpg', function(error, rgb, image) {
 ### CLI
 ``` sh
 $ huey /path/to/image
-=> rgb(x, x, x)
+=> r, g, b
 ```
 
 ### License
