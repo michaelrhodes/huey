@@ -39,5 +39,8 @@ $ huey /path/to/image
 => r, g, b
 ```
 
-### License
+## Server-implementation gotchas
+huey depends on [get-image-data](https://github.com/michaelrhodes/get-image-data), which in turn depends on [node-canvas](https://github.com/Automattic/node-canvas). Although node-canvas is a great project, its dependencies can make it hard to install. If you run into problems, I recommend checking out their install guides on the [node-canvas wiki](https://github.com/Automattic/node-canvas/wiki).
+
+## License
 [MIT](http://opensource.org/licenses/MIT)
