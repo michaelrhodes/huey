@@ -11,11 +11,11 @@
     "test": "test"
   },
   "dependencies": {
-    "get-image-data": "~2.2.0"
+    "get-image-data": "~2.2.0",
+    "brfs": "~0.0.8"
   },
   "devDependencies": {
-    "tape": "~2.1.0",
-    "brfs": "~0.0.8"
+    "tape": "~2.1.0"
   },
   "scripts": {
     "test": "tape test/server.js"
