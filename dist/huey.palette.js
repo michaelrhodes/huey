@@ -1,39 +1,4 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.huey = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var each = require('./lib/each')
-
-module.exports = function (data) {
-  var colorCount = {}
-  var highestColorCount = 0
-  var mostFrequentColor
-
-  each(data, function (rgb) {
-    rgb = rgb.join(',')
-    colorCount[rgb] = (
-      colorCount.hasOwnProperty(rgb) ?
-      ++colorCount[rgb] : 1
-    )
-  })
-
-  for (rgb in colorCount) {
-    if (colorCount[rgb] < highestColorCount) continue
-    highestColorCount = colorCount[rgb]
-    mostFrequentColor = rgb
-  }
-
-  if (!mostFrequentColor) return null
-
-  return mostFrequentColor
-    .split(',')
-    .map(function(value) {
-      return parseInt(value, 10)
-    })
-}
-
-},{"./lib/each":5}],2:[function(require,module,exports){
-module.exports = require('./lib/dominant.compat')
-module.exports.palette = require('./lib/palette.compat')
-
-},{"./lib/dominant.compat":4,"./lib/palette.compat":7}],3:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.palette = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var image = require('get-image-data')
 var validate = require('./validate')
 var is = require('./type-check')
@@ -60,11 +25,7 @@ module.exports = function (fn) {
   } 
 }
 
-},{"./type-check":8,"./validate":9,"get-image-data":10}],4:[function(require,module,exports){
-var wrap = require('./backwards-compatibility')
-module.exports = wrap(require('../dominant'))
-
-},{"../dominant":1,"./backwards-compatibility":3}],5:[function(require,module,exports){
+},{"./type-check":5,"./validate":6,"get-image-data":7}],2:[function(require,module,exports){
 module.exports = function (data, cb) {
   var dataLength = data.length
 
@@ -92,7 +53,7 @@ module.exports = function (data, cb) {
   }
 }
 
-},{}],6:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 /*!
  *  MMCQ.js
  *  Copyright (C) 2014 Nikola Klaric. MIT Licensed.
@@ -385,16 +346,16 @@ module.exports = (function (_Math) {
   return quantize
 })(Math)
 
-},{}],7:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 var wrap = require('./backwards-compatibility')
 module.exports = wrap(require('../palette'))
 
-},{"../palette":13,"./backwards-compatibility":3}],8:[function(require,module,exports){
+},{"../palette":10,"./backwards-compatibility":1}],5:[function(require,module,exports){
 module.exports = function (variable, type) {
   return variable && typeof variable === type
 }
 
-},{}],9:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 var is = require('./type-check')
 
 module.exports = function (path, callback) {
@@ -409,7 +370,7 @@ module.exports = function (path, callback) {
   return message ? new Error(message) : false
 }
 
-},{"./type-check":8}],10:[function(require,module,exports){
+},{"./type-check":5}],7:[function(require,module,exports){
 var get = require('get-image')
 var shared = require('./shared')
 
@@ -437,7 +398,7 @@ module.exports = function(path, callback) {
   })
 }
 
-},{"./shared":12,"get-image":11}],11:[function(require,module,exports){
+},{"./shared":9,"get-image":8}],8:[function(require,module,exports){
 module.exports = function (src, callback) {
   var image = new Image
 
@@ -452,7 +413,7 @@ module.exports = function (src, callback) {
   }
 }
 
-},{}],12:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 module.exports = function(canvas) {
   return function(image) {
     var context = canvas.getContext('2d')
@@ -466,7 +427,7 @@ module.exports = function(canvas) {
 }
  
 
-},{}],13:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 var each = require('./lib/each')
 var quantize = require('./lib/mmcq')
 
@@ -482,5 +443,5 @@ module.exports = function (data, n) {
   return quantize(colors, n !== 255 ? n + 1 : n).slice(0, n)
 }
 
-},{"./lib/each":5,"./lib/mmcq":6}]},{},[2])(2)
+},{"./lib/each":2,"./lib/mmcq":3}]},{},[4])(4)
 });
