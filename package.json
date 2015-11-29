@@ -1,7 +1,7 @@
 {
   "name": "huey",
-  "version": "1.1.7",
-  "description": "A little utility that finds the dominant colour of an image and returns it as an RGB array.",
+  "version": "1.2.0",
+  "description": "A little utility that finds the dominant colour or palette of an image.",
   "main": "index.js",
   "bin": "cli.js",
   "browserify": {
@@ -15,10 +15,22 @@
     "brfs": "~0.0.8"
   },
   "devDependencies": {
-    "tape": "~2.1.0"
+    "tape": "~2.1.0",
+    "browserify": "~12.0.1",
+    "uglifyjs": "~2.4.10"
   },
   "scripts": {
-    "test": "tape test/server.js"
+    "test": "tape test/server.js",
+    "build": "npm run b:compat && npm run b:dominant && npm run b:palette",
+    "b:compat": "npm run b:compat:max && npm run b:compat:min",
+    "b:dominant": "npm run b:dominant:max && npm run b:dominant:min",
+    "b:palette": "npm run b:palette:max && npm run b:palette:min",
+    "b:compat:max": "browserify -s huey index.js > dist/huey.js",
+    "b:compat:min": "browserify -s huey index.js | uglifyjs -cm 2>/dev/null > dist/huey.min.js",
+    "b:dominant:max": "browserify -s dominant lib/dominant.compat.js > dist/huey.dominant.js",
+    "b:dominant:min": "browserify -s dominant lib/dominant.compat.js | uglifyjs -cm 2>/dev/null > dist/huey.dominant.min.js",
+    "b:palette:max": "browserify -s palette lib/palette.compat.js > dist/huey.palette.js",
+    "b:palette:min": "browserify -s palette lib/palette.compat.js | uglifyjs -cm 2>/dev/null > dist/huey.palette.min.js"
   },
   "testling": {
     "files": "test/browser.js",
@@ -36,11 +48,7 @@
     "type": "git",
     "url": "git@github.com:michaelrhodes/huey.git"
   },
-  "keywords": [
-    "dominant",
-    "colour",
-    "color"
-  ],
+  "keywords": ["dominant", "palette", "colour", "color"],
   "author": "Michael Rhodes",
   "license": "MIT",
   "bugs": {

@@ -1,5 +1,5 @@
 # huey
-huey is a little utility that finds the dominant colour of an image and returns it as an RGB array. It now works on the server as well as in the browser, and there’s also a command-line version.
+huey is a little utility that finds the dominant colour or palette of an image. It works on the server as well as in the browser, and there’s also a command-line version.
 
 [![Build status](https://travis-ci.org/michaelrhodes/huey.png?branch=master)](https://travis-ci.org/michaelrhodes/huey)
 
@@ -15,9 +15,26 @@ $ npm install [-g] huey
 ```
 
 ## Usage
+### Recommended
+```js
+var image = require('get-image-data')
+var dominant = require('huey/dominant')
+var palette = require('huey/palette')
 
-### Browser & Server
+image('./image.jpg', function (error, img) {
+  console.log(dominant(img.data))
+  // => [124, 51, 21]
+
+  console.log(palette(img.data, 2))
+  // => [[121, 50, 23], [243, 21, 23]]
+})
+```
+
+### Legacy
+You should really only require code you need, but if you want the kitchen sink…
 ``` js
+var huey = require('huey')
+
 huey('./image.jpg', function(error, rgb, image) {
   var red = rgb[0]
   var green = rgb[1]
@@ -31,9 +48,25 @@ huey('./image.jpg', function(error, rgb, image) {
     image.width
   )
 })
+
+huey.palette('./image.jpg', 2, function(error, palette, image) {
+  palette.forEach(function (rgb) {
+    var red = rgb[0]
+    var green = rgb[1]
+    var blue = rgb[2]
+  })
+
+  // In case you want to do something
+  // with the raw image data.
+  console.log(
+    image.data,
+    image.height,
+    image.width
+  )
+})
 ```
 
-### CLI
+### Legacy CLI
 ``` sh
 $ huey /path/to/image
 => r, g, b

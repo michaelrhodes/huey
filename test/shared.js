@@ -40,4 +40,12 @@ module.exports = function(huey, path) {
       test.ok(image, 'it does')
     })
   })
+
+  run('it returns an image palette', function(test) {
+    test.plan(2)
+    huey.palette(path.trad, 3, function(error, palette) {
+      test.ok(palette, 'it does')
+      test.equal(palette.length, 3, 'it is the correct length')
+    })
+  })
 }
