@@ -2,7 +2,7 @@
 
 huey is a little utility that finds the dominant colour or palette of an image. It works on the server as well as in the browser, and there’s also a command-line version.
 
-[![Build status](https://travis-ci.org/michaelrhodes/huey.png?branch=master)](https://travis-ci.org/michaelrhodes/huey)
+[![Build status](https://travis-ci.org/michaelrhodes/huey.svg?branch=master)](https://travis-ci.org/michaelrhodes/huey)
 
 [![Browser support](https://ci.testling.com/michaelrhodes/huey.png)](https://ci.testling.com/michaelrhodes/huey)
 
@@ -13,8 +13,11 @@ huey is a little utility that finds the dominant colour or palette of an image. 
 ## Install
 
 ```sh
-$ npm install [-g] huey
+$ npm install [-g] huey [canvas]
 ```
+**note: canvas is not installed alongside huey**
+
+huey requires [automattic/node-canvas](https://github.com/automattic/node-canvas) for its server/node variant, however, to avoid browser-only users from having to endure the native compilation process, it needs to be npm installed separately.
 
 ## Usage
 
