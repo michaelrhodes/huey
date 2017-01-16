@@ -18,11 +18,13 @@
     "tape": "~2.1.0",
     "canvas": "~1.6.2",
     "browserify": "~12.0.1",
+    "testling": "~1.7.1",
     "size-table": "~0.1.0",
     "uglifyjs": "~2.4.10"
   },
   "scripts": {
     "test": "tape test/server.js",
+    "test:browser": "testling -u",
     "build": "npm run b:compat && npm run b:dominant && npm run b:palette && npm run size",
     "size": "browserify -s huey index.js | size-table huey",
     "b:compat": "npm run b:compat:max && npm run b:compat:min",
