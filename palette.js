@@ -1,3 +1,4 @@
+var hex = require('./util/hex')
 var skip = require('./util/skip')
 var quantize = require('./util/quantize')
 
@@ -35,4 +36,9 @@ function palette (data, n, threshold) {
   // more or less colors than you actually asked for…
   return quantize(colors, Math.min(255, n + 1))
     .slice(0, n)
+    .map(function (rgb) {
+      return hex(rgb[0]) +
+        hex(rgb[1]) +
+        hex(rgb[2])
+    })
 }

@@ -1,3 +1,4 @@
+var hex = require('./util/hex')
 var skip = require('./util/skip')
 
 module.exports = dominant
@@ -37,8 +38,4 @@ function dominant (data, threshold) {
   }
 
   return winner
-}
-
-function hex (val) {
-  return ('0' + val.toString(16)).substr(-2)
 }

@@ -8,7 +8,6 @@
     "brfs": "2.0.1",
     "dexy": "github:michaelrhodes/dexy#1.0.1",
     "get-image-data": "4.0.0",
-    "sharp": "0.21.3",
     "wzrd": "1.5.0"
   },
   "scripts": {

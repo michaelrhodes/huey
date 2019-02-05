@@ -1,5 +1,5 @@
 var path = require('path')
-var image = require('get-image-data/native')
+var image = require('get-image-data')
 var load = require('./images/load')(image)
 var runner = require('./runner')
 var huey = require('../')
