@@ -1,62 +1,18 @@
 {
   "name": "huey",
+  "author": "Michael Rhodes",
   "version": "2.0.0",
-  "description": "A little utility that finds the dominant colour or palette of an image.",
   "main": "index.js",
-  "bin": "cli.js",
-  "browserify": {
-    "transform": ["brfs"]
-  },
-  "directories": {
-    "test": "test"
-  },
-  "dependencies": {
-    "get-image-data": "~3.0.1",
-    "brfs": "~0.0.8"
-  },
+  "license": "MIT",
   "devDependencies": {
-    "tape": "~2.1.0",
-    "canvas": "~1.6.2",
-    "browserify": "~12.0.1",
-    "testling": "~1.7.1",
-    "size-table": "~0.1.0",
-    "uglifyjs": "~2.4.10"
+    "brfs": "2.0.1",
+    "dexy": "github:michaelrhodes/dexy#1.0.1",
+    "get-image-data": "4.0.0",
+    "sharp": "0.21.3",
+    "wzrd": "1.5.0"
   },
   "scripts": {
-    "test": "tape test/server.js",
-    "test:browser": "testling -u",
-    "build": "npm run b:compat && npm run b:dominant && npm run b:palette && npm run size",
-    "size": "browserify -s huey index.js | size-table huey",
-    "b:compat": "npm run b:compat:max && npm run b:compat:min",
-    "b:dominant": "npm run b:dominant:max && npm run b:dominant:min",
-    "b:palette": "npm run b:palette:max && npm run b:palette:min",
-    "b:compat:max": "browserify -s huey index.js > dist/huey.js",
-    "b:compat:min": "browserify -s huey index.js | uglifyjs -cm 2>/dev/null > dist/huey.min.js",
-    "b:dominant:max": "browserify -s dominant lib/dominant.compat.js > dist/huey.dominant.js",
-    "b:dominant:min": "browserify -s dominant lib/dominant.compat.js | uglifyjs -cm 2>/dev/null > dist/huey.dominant.min.js",
-    "b:palette:max": "browserify -s palette lib/palette.compat.js > dist/huey.palette.js",
-    "b:palette:min": "browserify -s palette lib/palette.compat.js | uglifyjs -cm 2>/dev/null > dist/huey.palette.min.js"
-  },
-  "testling": {
-    "files": "test/browser.js",
-    "browsers": {
-      "ie": [8, 9, 10],
-      "chrome": [20, 25, 29],
-      "firefox": [4, 19, 24],
-      "safari": [5.1, 6],
-      "opera": [10, 12, 15],
-      "iphone": [6],
-      "android": [4.2]
-    }
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:michaelrhodes/huey.git"
-  },
-  "keywords": ["dominant", "palette", "colour", "color"],
-  "author": "Michael Rhodes",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/michaelrhodes/huey/issues"
+    "test": "dexy test/node.js",
+    "test:browser": "wzrd test/browser.js -- -t brfs"
   }
 }

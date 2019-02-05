@@ -1,14 +1,21 @@
-var each = require('./lib/each')
-var quantize = require('./lib/mmcq')
+var skip = require('./util/skip')
+var quantize = require('./util/quantize')
 
-module.exports = function (data, n) {
-  n = isNaN(n) ? 5 : n
+module.exports = palette
+
+function palette (data, n) {
+  n = n == null || isNaN(n) ? 5 : +n
+
+  var i = 0, l = data.length
+  var offset = skip(l)
   var colors = []
-  each(data, function (rgb) {
-    colors.push(rgb)
-  })
+
+  for (; i < l; i += offset) colors.push([
+    data[i], data[i + 1], data[i + 2]
+  ])
 
   // Sometimes quantize is a weirdo and returns
   // more or less colors than you actually asked for…
-  return quantize(colors, n !== 255 ? n + 1 : n).slice(0, n)
+  return quantize(colors, Math.min(255, n + 1))
+    .slice(0, n)
 }

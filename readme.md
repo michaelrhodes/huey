@@ -1,100 +1,35 @@
 # huey
+isomorphic dominant colour/palette extraction
 
-huey is a little utility that finds the dominant colour or palette of an image. It works on the server as well as in the browser, and there’s also a command-line version.
+[![build status](https://travis-ci.org/michaelrhodes/huey.svg?branch=master)](https://travis-ci.org/michaelrhodes/huey)
 
-[![Build status](https://travis-ci.org/michaelrhodes/huey.svg?branch=master)](https://travis-ci.org/michaelrhodes/huey)
+[![browser support](https://ci.testling.com/michaelrhodes/huey.png)](https://ci.testling.com/michaelrhodes/huey)
 
-[![Browser support](https://ci.testling.com/michaelrhodes/huey.png)](https://ci.testling.com/michaelrhodes/huey)
-
-### Demonstration
-
-<http://michaelrhodes.github.io/huey/>
-
-## Install
-
+## install
 ```sh
-$ npm install [-g] huey [canvas]
+npm install huey [get-image-data]
 ```
-**note: canvas is not installed alongside huey**
 
-huey requires [automattic/node-canvas](https://github.com/automattic/node-canvas) for its server/node variant, however, to avoid browser-only users from having to endure the native compilation process, it needs to be npm installed separately.
-
-## Usage
-
-### Recommended
-
+## use
 ```js
 var image = require('get-image-data')
 var dominant = require('huey/dominant')
 var palette = require('huey/palette')
 
-image('./image.jpg', function (error, img) {
+image('./image.jpg', function (err, img) {
   console.log(dominant(img.data))
-  // => [124, 51, 21]
+  // => '7c3315'
 
   console.log(palette(img.data, 2))
-  // => [[121, 50, 23], [243, 21, 23]]
+  // => ['793217', 'f31517']
 })
 ```
 
-### Legacy
+## obey
+Copyright 2013–2019 Michael Rhodes
 
-You should really only require code you need, but if you want the kitchen sink…
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-```js
-var huey = require('huey')
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-huey('./image.jpg', function(error, rgb, image) {
-  var red = rgb[0]
-  var green = rgb[1]
-  var blue = rgb[2]
-
-  // In case you want to do something
-  // with the raw image data.
-  console.log(
-    image.data,
-    image.height,
-    image.width
-  )
-})
-
-huey.palette('./image.jpg', 2, function(error, palette, image) {
-  palette.forEach(function (rgb) {
-    var red = rgb[0]
-    var green = rgb[1]
-    var blue = rgb[2]
-  })
-
-  // In case you want to do something
-  // with the raw image data.
-  console.log(
-    image.data,
-    image.height,
-    image.width
-  )
-})
-```
-
-#### Legacy page weight
-
-| compression    |     size |
-| :------------- | -------: |
-| huey.js        | 13.29 kB |
-| huey.min.js    |  5.57 kB |
-| huey.min.js.gz |  2.36 kB |
-
-
-### Legacy CLI
-
-```sh
-$ huey /path/to/image
-=> r, g, b
-```
-
-## Server-implementation gotchas
-
-huey depends on [get-image-data](https://github.com/michaelrhodes/get-image-data), which in turn depends on [node-canvas](https://github.com/Automattic/node-canvas). Although node-canvas is a great project, its dependencies can make it hard to install. If you run into problems, I recommend checking out their install guides on the [node-canvas wiki](https://github.com/Automattic/node-canvas/wiki).
-
-## License
-
-[MIT](http://opensource.org/licenses/MIT)
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

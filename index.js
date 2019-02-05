@@ -1,2 +1,4 @@
-module.exports = require('./lib/dominant.compat')
-module.exports.palette = require('./lib/palette.compat')
+module.exports = {
+  dominant: require('./dominant'),
+  palette: require('./palette')
+}
