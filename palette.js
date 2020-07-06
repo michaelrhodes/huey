@@ -1,17 +1,11 @@
-var hex = require('./util/hex')
-var skip = require('./util/skip')
 var quantize = require('./util/quantize')
+var skip = require('./util/skip')
+var num = require('./util/num')
 
 module.exports = palette
 
 function palette (data, n, threshold) {
-  n = n == null ||
-    isNaN(n) ? 5 :
-    Number(n)
-
-  threshold = threshold == null ||
-    isNaN(threshold) ? 0 :
-    Number(threshold)
+  threshold = num(threshold, 0)
 
   var i = 0, l = data.length
   var r, g, b, min, max, color
@@ -35,10 +29,5 @@ function palette (data, n, threshold) {
   // Sometimes quantize is a weirdo and returns
   // more or less colors than you actually asked for…
   return quantize(colors, Math.min(255, n + 1))
-    .slice(0, n)
-    .map(function (rgb) {
-      return hex(rgb[0]) +
-        hex(rgb[1]) +
-        hex(rgb[2])
-    })
+    .slice(0, num(n, 5))
 }

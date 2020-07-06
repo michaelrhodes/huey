@@ -1,12 +1,10 @@
-var hex = require('./util/hex')
 var skip = require('./util/skip')
+var num = require('./util/num')
 
 module.exports = dominant
 
 function dominant (data, threshold) {
-  threshold = threshold == null ||
-    isNaN(threshold) ? 0 :
-    Number(threshold)
+  threshold = num(threshold, 0)
 
   var highest = 0
   var winner = null
@@ -27,7 +25,7 @@ function dominant (data, threshold) {
       if (max - min < threshold) continue
     }
 
-    color = hex(r) + hex(g) + hex(b)
+    color = r + ',' + g + ',' + b
     count[color] = (count[color] || 0) + 1
   }
 
@@ -37,5 +35,5 @@ function dominant (data, threshold) {
     winner = color
   }
 
-  return winner
+  return winner.split(',').map(Number)
 }

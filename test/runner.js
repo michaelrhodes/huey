@@ -1,26 +1,27 @@
-var hex = /^[0-9a-f]{6}$/
-
 module.exports = runner
 
 function runner (huey, data) {
-  var result
+  assertRGBArray(huey.dominant(data.trad))
+  assertRGBArray(huey.dominant(data.jerry))
+  assertRGBArray(huey.dominant(data.astronaut))
 
-  result = huey.dominant(data.trad)
-  console.assert(typeof result === 'string')
-  console.assert(hex.test(result))
+  var palette = huey.palette(data.trad, 4)
+  assertOk(Array.isArray(palette))
+  assertOk(palette.length === 4)
+  assertRGBArray(palette[0])
+  assertRGBArray(palette[1])
+  assertRGBArray(palette[2])
+  assertRGBArray(palette[3])
+}
 
-  result = huey.dominant(data.jerry)
-  console.assert(typeof result === 'string')
-  console.assert(hex.test(result))
+function assertOk (result) {
+  console.assert(result)
+}
 
-  result = huey.dominant(data.astronaut)
-  console.assert(typeof result === 'string')
-  console.assert(hex.test(result))
-
-  result = huey.palette(data.trad, 3)
+function assertRGBArray (result) {
   console.assert(Array.isArray(result))
   console.assert(result.length === 3)
-  console.assert(hex.test(result[0]), result[0])
-  console.assert(hex.test(result[1]))
-  console.assert(hex.test(result[2]))
+  console.assert(typeof result[0] === 'number')
+  console.assert(typeof result[1] === 'number')
+  console.assert(typeof result[2] === 'number')
 }

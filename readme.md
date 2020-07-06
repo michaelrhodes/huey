@@ -3,8 +3,6 @@ isomorphic dominant colour/palette extraction
 
 [![build status](https://travis-ci.org/michaelrhodes/huey.svg?branch=master)](https://travis-ci.org/michaelrhodes/huey)
 
-[![browser support](https://ci.testling.com/michaelrhodes/huey.png)](https://ci.testling.com/michaelrhodes/huey)
-
 ## install
 ```sh
 npm install huey [get-image-data]
@@ -18,15 +16,15 @@ var palette = require('huey/palette')
 
 image('./image.jpg', function (err, img) {
   console.log(dominant(img.data))
-  // => '7c3315'
+  // => [124, 51, 21]
 
   console.log(palette(img.data, 2))
-  // => ['793217', 'f31517']
+  // => [[121, 50, 23], [243, 21, 23]]
 })
 ```
 
 ## obey
-Copyright 2013–2019 Michael Rhodes
+Copyright 2013–2020 Michael Rhodes
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
