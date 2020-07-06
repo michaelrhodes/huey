@@ -19,9 +19,9 @@ function assertOk (result) {
 }
 
 function assertRGBArray (result) {
-  console.assert(Array.isArray(result))
-  console.assert(result.length === 3)
-  console.assert(typeof result[0] === 'number')
-  console.assert(typeof result[1] === 'number')
-  console.assert(typeof result[2] === 'number')
+  assertOk(Array.isArray(result))
+  assertOk(result.length === 3)
+  assertOk(typeof result[0] === 'number')
+  assertOk(typeof result[1] === 'number')
+  assertOk(typeof result[2] === 'number')
 }
