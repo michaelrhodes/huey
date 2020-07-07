@@ -5,7 +5,7 @@ var num = require('./util/num')
 module.exports = palette
 
 function palette (data, n, threshold) {
-  threshold = num(threshold, 0)
+  n = num(n, 5), threshold = num(threshold, 0)
 
   var i = 0, l = data.length
   var r, g, b, min, max, color
@@ -29,5 +29,5 @@ function palette (data, n, threshold) {
   // Sometimes quantize is a weirdo and returns
   // more or less colors than you actually asked for…
   return quantize(colors, Math.min(255, n + 1))
-    .slice(0, num(n, 5))
+    .slice(0, n)
 }
