@@ -4,6 +4,7 @@ function runner (huey, data) {
   assertRGBArray(huey.dominant(data.trad))
   assertRGBArray(huey.dominant(data.jerry))
   assertRGBArray(huey.dominant(data.astronaut))
+  assertNull(huey.dominant(data.astronaut, 255))
 
   var palette = huey.palette(data.trad, 4)
   assertOk(Array.isArray(palette))
@@ -16,6 +17,10 @@ function runner (huey, data) {
 
 function assertOk (result) {
   console.assert(result)
+}
+
+function assertNull (result) {
+  assertOk(result === null)
 }
 
 function assertRGBArray (result) {

@@ -6,10 +6,7 @@ module.exports = dominant
 function dominant (data, threshold) {
   threshold = num(threshold, 0)
 
-  var highest = 0
-  var winner = null
-  var count = {}
-
+  var highest, winner, count = {}
   var i = 0, l = data.length
   var r, g, b, min, max, color
   var offset = skip(l)
@@ -31,9 +28,10 @@ function dominant (data, threshold) {
 
   for (color in count) {
     if (count[color] <= highest) continue
-    highest = count[color]
-    winner = color
+    highest = count[winner = color]
   }
 
-  return winner.split(',').map(Number)
+  return winner ?
+    winner.split(',').map(Number) :
+    null
 }
